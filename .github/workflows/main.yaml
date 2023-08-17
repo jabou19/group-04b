@@ -31,8 +31,8 @@ jobs:
     permissions:
       packages: write
     env:
-      docker_username: ${{ jabou19 }}
-      docker_password: ${{ rtfgvb$@12 }}
+      docker_username: ${{  github.jabou19 }}
+      docker_password: ${{ secrets.rtfgvb$@12 }}
     steps:  
       - uses: actions/download-artifact@v3
         with:
