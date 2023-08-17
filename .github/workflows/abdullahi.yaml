@@ -1,1 +1,44 @@
+name: Run Tests
 
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.x
+
+    - name: Build and test
+      run: |
+        cd frontend
+        go test -v ./...
+    - name: Upload test results
+      uses: actions/upload-artifact@v2
+      with:
+        name: test-results
+        path: frontend/test_report.txt
+
+  Docker-image:
+    runs-on: ubuntu-latest
+    needs: [test]
+    permissions:
+      packages: write
+    env:
+      docker_username: ${{ abdullahi10 }}
+      docker_password: ${{ dckr_pat_PlvIV8pwuJfYxVYsw9x6_xjrNtg }}
+    steps:  
+      - uses: actions/download-artifact@v3
+        with:
+          name: test-results
+          path: .
+      - name: build docker
+        run: chmod +x ci/build-docker.sh && ci/build-docker.sh
+      - name: push docker
+        run: chmod +x ci/push-docker.sh && ci/push-docker.sh
