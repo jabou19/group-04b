@@ -4,12 +4,6 @@ FROM golang:1.16 AS builder
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy the Go mod and sum files to the container
-COPY go.mod ./
-
-# Download all dependencies
-RUN go mod download
-
 # Copy the entire frontend directory to the container
 COPY . .
 
@@ -21,6 +15,9 @@ FROM alpine:latest
 
 # Copy the binary from the builder stage
 COPY --from=builder /app/frontend /frontend
+COPY --from=builder /app/static /static
+COPY --from=builder /app/templates /templates
+
 
 # Expose port 8080 for the frontend service
 EXPOSE 8080
