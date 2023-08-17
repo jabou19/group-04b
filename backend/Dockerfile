@@ -3,15 +3,12 @@ FROM golang:1.16 AS builder
 
 # Set the working directory in the container
 WORKDIR /app
-
-# Copy the Go mod and sum files to the container
-COPY go.mod go.sum ./
+# Copy the entire backend directory to the container
+COPY . . 
 
 # Download all dependencies
 RUN go mod download
 
-# Copy the entire backend directory to the container
-COPY . .
 
 # Build the Go app
 RUN CGO_ENABLED=0 GOOS=linux go build -o backend .
