@@ -31,8 +31,8 @@ jobs:
     permissions:
       packages: write
     env:
-      docker_username: ${{ github.actor }}
-      docker_password: ${{ secrets.GITHUB_TOKEN }}
+      docker_username: ${{ jabou19 }}
+      docker_password: ${{ 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 }}
     steps:  
       - uses: actions/download-artifact@v3
         with:
