@@ -31,8 +31,8 @@ jobs:
     permissions:
       packages: write
     env:
-      docker_username: ${{ abdullahi10 }}
-      docker_password: ${{ dckr_pat_PlvIV8pwuJfYxVYsw9x6_xjrNtg }}
+      docker_username: ${{ AbdullahiMohamed20 }}
+      docker_password: ${{ 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 }}
     steps:  
       - uses: actions/download-artifact@v3
         with:
