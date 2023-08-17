@@ -1,4 +1,4 @@
-name: Run Tests
+name: Abdullahi
 
 on: [push, pull_request]
 
