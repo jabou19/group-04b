@@ -19,6 +19,7 @@ jobs:
       run: |
         cd frontend
         go test -v ./...
+
     - name: Upload test results
       uses: actions/upload-artifact@v2
       with:
