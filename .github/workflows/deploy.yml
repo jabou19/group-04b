@@ -1,0 +1,17 @@
+name: Deploy to Kubernetes
+
+on:
+  push:
+    branches:
+      - main  # Change this to your default branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Deploy to Kubernetes
+        run: ./deploy.sh
