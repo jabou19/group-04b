@@ -6,7 +6,7 @@ metadata:
     app: deployment-backend
   name: deployment-backend
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: deployment-backend
@@ -18,7 +18,7 @@ spec:
         app: deployment-backend
     spec:
       containers:
-        - image: abdullahi10/myfirstapp:release
-          name: myfirstapp
+      - image: abdullahi10/myfirstapp:release
+        name: myfirstapp
         resources: {}
 status: {}
