@@ -7,11 +7,8 @@ WORKDIR /app
 COPY . . 
 
 # Download all dependencies
-RUN go mod download
-
-
-# Build the Go app
-RUN CGO_ENABLED=0 GOOS=linux go build -o backend .
+RUN go mod download && \
+    CGO_ENABLED=0 GOOS=linux go build -o backend .
 
 ### Multi-stage build
 FROM alpine:latest
