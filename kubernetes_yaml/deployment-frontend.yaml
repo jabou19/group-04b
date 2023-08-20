@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: deployment-frontend
+  name: deployment-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: deployment-frontend
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: deployment-frontend
+    spec:
+      containers:
+      - image: abdullahi10/myfirstapp:release
+        name: myfirstapp
+        resources: {}
+status: {}
