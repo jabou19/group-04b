@@ -22,4 +22,6 @@ jobs:
         run: chmod +x deploy.sh
 
       - name: Deploy to Kubernetes
+        env:
+          KUBECONFIG_BASE64: ${{ secrets.KUBECONFIG }}
         run: /home/runner/work/group-04b/group-04b/kubernetes_yaml/deploy.sh
