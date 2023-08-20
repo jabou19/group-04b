@@ -1,4 +1,4 @@
-name: Abdullahi
+name: Run Tests
 
 on: [push, pull_request]
 
@@ -23,4 +23,11 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: test-results
-        path: frontend/test_report.txt
+        path: ls -l frontend/
+    - name: Build and push Docker images
+      uses: mr-smithers-excellent/docker-build-push@v4
+      with:
+        image: abdullahi10/myfirstapp
+        registry: docker.io
+        docker_username: ${{ secrets.DOCKER_USERNAME }}
+        docker_password: ${{ secrets.DOCKER_PASSWORD }}
