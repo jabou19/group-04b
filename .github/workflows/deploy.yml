@@ -21,5 +21,12 @@ jobs:
       - name: Set execute permission
         run: chmod +x deploy.sh
 
+      - name: Print Working Directory
+        run: pwd
+
+      - name: List Contents
+        run: ls -la
+
+
       - name: Deploy to Kubernetes
         run: ls -la group-04b/kubernetes_yaml
