@@ -22,4 +22,4 @@ jobs:
         run: chmod +x deploy.sh
 
       - name: Deploy to Kubernetes
-        run: group-04b/kubernetes_yaml/deploy.sh
+        run: ls -la group-04b/kubernetes_yaml
