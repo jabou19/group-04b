@@ -16,5 +16,8 @@ jobs:
       - name: Set execute permission
         run: chmod +x /home/runner/work/group-04b/group-04b/kubernetes_yaml/deploy.sh
 
+      - name: authentication
+        run: echo "${{ secrets.KUBECONFIG }}"
+
       - name: Deploy to Kubernetes
         run: /home/runner/work/group-04b/group-04b/kubernetes_yaml/deploy.sh
