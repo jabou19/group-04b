@@ -6,7 +6,11 @@ metadata:
     app: deployment-backend
   name: deployment-backend
 spec:
+<<<<<<< HEAD
   replicas: 2
+=======
+  replicas: 3
+>>>>>>> 84e54b4 (added abdulahi's files so I can work)
   selector:
     matchLabels:
       app: deployment-backend
@@ -18,9 +22,16 @@ spec:
         app: deployment-backend
     spec:
       containers:
+<<<<<<< HEAD
 #      - image: eficodeacademy/devopsacademyb:latest
 #      - image: ghcr.io/eficode-academy/quotes-flask-backend:release
       - image: abdullahi10/myfirstapp:release
         name: myfirstapp
         resources: {}
 status: {}
+=======
+        - image: abdullahi10/myfirstapp:release
+          name: myfirstapp
+        resources: {}
+status: {}
+>>>>>>> 84e54b4 (added abdulahi's files so I can work)
