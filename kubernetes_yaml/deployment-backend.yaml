@@ -20,7 +20,7 @@ spec:
       containers:
 #      - image: eficodeacademy/devopsacademyb:latest
 #      - image: ghcr.io/eficode-academy/quotes-flask-backend:release
-      - image: abdullahi10/myfirstapp:release
+      - image: jabou19/myfirstapp:latest
         name: myfirstapp
         resources: {}
 status: {}
