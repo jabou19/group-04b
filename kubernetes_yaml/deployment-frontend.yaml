@@ -18,6 +18,8 @@ spec:
         app: deployment-frontend
     spec:
       containers:
+#      - image: eficodeacademy/devopsacademyb:latest
+#      - image: ghcr.io/eficode-academy/quotes-flask-frontend:release
       - image: abdullahi10/myfirstapp:release
         name: myfirstapp
         resources: {}
