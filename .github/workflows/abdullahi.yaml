@@ -29,5 +29,5 @@ jobs:
       with:
         image: abdullahi10/myfirstapp
         registry: docker.io
-        docker_username: ${{ secrets.DOCKER_USERNAME }}
-        docker_password: ${{ secrets.DOCKER_PASSWORD }}
+        docker_username: ${{ secrets.USERNAME }}
+        docker_password: ${{ secrets.PASSWORD }}
