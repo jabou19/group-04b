@@ -18,7 +18,7 @@ spec:
         app: deployment-backend
     spec:
       containers:
-        - image: abdullahi10/myfirstapp:release
+        - image: jabou19/myfirstapp:latest
           name: myfirstapp
-        resources: {}
+          resources: {}
 status: {}

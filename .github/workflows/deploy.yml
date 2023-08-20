@@ -13,7 +13,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-        
+      - name: Set up Kubeconfig
+        run: echo "${{ secrets.KUBECONFIG }}" > kubeconfig-base64
+        env:
+          KUBECONFIG_BASE64: ${{ secrets.KUBECONFIG }}
+
       - name: Set execute permission
         run: chmod +x deploy.sh
 
