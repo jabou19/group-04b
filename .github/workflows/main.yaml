@@ -58,7 +58,7 @@ jobs:
       run: docker push ghcr.io/${{ github.repository_owner }}/group04b-backend:latest
 
   deploy:
-    if: github.ref == 'refs/heads/Jakub'
+    if: github.ref == 'refs/heads/Bouzan'
     needs: docker
     runs-on: ubuntu-latest
 
