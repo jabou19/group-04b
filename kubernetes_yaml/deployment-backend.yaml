@@ -20,6 +20,7 @@ spec:
     spec:
       containers:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #      - image: eficodeacademy/devopsacademyb:latest
 #      - image: ghcr.io/eficode-academy/quotes-flask-backend:release
@@ -29,6 +30,9 @@ spec:
 status: {}
 =======
         - image: jabou19/myfirstapp:latest
+=======
+        - image: ghcr.io/jabou19/group04b-backend:latest
+>>>>>>> Bouzan
           name: myfirstapp
           resources: {}
 

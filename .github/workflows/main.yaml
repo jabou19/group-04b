@@ -1,0 +1,54 @@
+name: Run Tests and Build Docker Images
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.x
+
+    - name: Build and test
+      run: |
+        cd frontend
+        go test -v ./...
+        
+    - name: Upload test results
+      uses: actions/upload-artifact@v2
+      with:
+        name: test-results
+        path: frontend/test_report.txt
+
+  docker:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Build frontend Docker image
+      run: |
+        cd frontend
+        docker build -t ghcr.io/${{ github.repository_owner }}/group04b-frontend:latest .
+
+    - name: Build backend Docker image
+      run: |
+        cd backend
+        docker build -t ghcr.io/${{ github.repository_owner }}/group04b-backend:latest .
+
+    - name: Login to GitHub Container Registry
+      run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+    - name: Push frontend Docker image
+      run: docker push ghcr.io/${{ github.repository_owner }}/group04b-frontend:latest
+
+    - name: Push backend Docker image
+      run: docker push ghcr.io/${{ github.repository_owner }}/group04b-backend:latest
