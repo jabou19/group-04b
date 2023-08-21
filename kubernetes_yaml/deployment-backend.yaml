@@ -18,7 +18,7 @@ spec:
         app: deployment-backend
     spec:
       containers:
-        - image: jabou19/myfirstapp:latest
+        - image: ghcr.io/jabou19/group04b-backend:latest
           name: myfirstapp
           resources: {}
 
