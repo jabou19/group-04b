@@ -1,0 +1,35 @@
+name: Deploy to Kubernetes
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Kubernetes context
+      uses: azure/k8s-set-context@v1
+      with:
+        kubeconfig: ${{ secrets.KUBECONFIG }}
+
+    - name: Deploy frontend to Kubernetes
+      uses: azure/k8s-deploy@v1
+      with:
+        manifests: |
+          ./path-to-manifests/frontend-deployment.yaml
+        namespace: default
+        action: 'apply'
+
+    - name: Deploy backend to Kubernetes
+      uses: azure/k8s-deploy@v1
+      with:
+        manifests: |
+          ./path-to-manifests/backend-deployment.yaml
+        namespace: default
+        action: 'apply'
