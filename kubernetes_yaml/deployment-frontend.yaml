@@ -18,22 +18,9 @@ spec:
         app: deployment-frontend
     spec:
       containers:
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> main
 #      - image: eficodeacademy/devopsacademyb:latest
 #      - image: ghcr.io/eficode-academy/quotes-flask-frontend:release
       - image: abdullahi10/myfirstapp:release
         name: myfirstapp
         resources: {}
 status: {}
-<<<<<<< HEAD
-=======
-      - image: abdullahi10/myfirstapp:release
-        name: myfirstapp
-        resources: {}
-status: {}
->>>>>>> 84e54b4 (added abdulahi's files so I can work)
-=======
->>>>>>> main
