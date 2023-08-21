@@ -1,6 +1,6 @@
-kubectl --token "$KUBECONFIG"
+kubectl --token $KUBECONFIG
 
 kubectl --kubeconfig "$KUBECONFIG" apply -f deployment-backend.yaml
 kubectl --kubeconfig "$KUBECONFIG" apply -f deployment-frontend.yaml
 
-kubectl --token "$KUBECONFIG"
+kubectl --token $KUBECONFIG
