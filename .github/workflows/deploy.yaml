@@ -1,0 +1,22 @@
+name: Deploy to Kubernetes
+
+on:
+  push:
+    branches:
+      - main  # Change this to your default branch
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set execute permission
+        run: chmod +x /home/runner/work/group-04b/group-04b/kubernetes_yaml/deploy.sh
+
+      - name: authentication
+        run: echo "${{ secrets.KUBECONFIG }}"
+
+      - name: Deploy to Kubernetes
+        run: /home/runner/work/group-04b/group-04b/kubernetes_yaml/deploy.sh
