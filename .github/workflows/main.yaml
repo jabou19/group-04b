@@ -1,4 +1,4 @@
-name: Main
+name: Run Tests and Build Docker Images
 
 on: [push, pull_request]
 
@@ -19,26 +19,36 @@ jobs:
       run: |
         cd frontend
         go test -v ./...
+        
     - name: Upload test results
       uses: actions/upload-artifact@v2
       with:
         name: test-results
         path: frontend/test_report.txt
 
-  Docker-image:
+  docker:
+    needs: test
     runs-on: ubuntu-latest
-    needs: [test]
-    permissions:
-      packages: write
-    env:
-      docker_username: ${{  github.jabou19 }}
-      docker_password: ${{ secrets.rtfgvb$@12 }}
-    steps:  
-      - uses: actions/download-artifact@v3
-        with:
-          name: test-results
-          path: .
-      - name: build docker
-        run: chmod +x ci/build-docker.sh && ci/build-docker.sh
-      - name: push docker
-        run: chmod +x ci/push-docker.sh && ci/push-docker.sh
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Build frontend Docker image
+      run: |
+        cd frontend
+        docker build -t ghcr.io/${{ github.repository_owner }}/group04b-frontend:latest .
+
+    - name: Build backend Docker image
+      run: |
+        cd backend
+        docker build -t ghcr.io/${{ github.repository_owner }}/group04b-backend:latest .
+
+    - name: Login to GitHub Container Registry
+      run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+    - name: Push frontend Docker image
+      run: docker push ghcr.io/${{ github.repository_owner }}/group04b-frontend:latest
+
+    - name: Push backend Docker image
+      run: docker push ghcr.io/${{ github.repository_owner }}/group04b-backend:latest
