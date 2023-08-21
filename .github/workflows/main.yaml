@@ -1,36 +1,54 @@
-#go
-name: Deploy to Kubernetes
+name: Run Tests and Build Docker Images
 
-on:
-  push:
-    branches:
-      - main
+on: [push, pull_request]
 
 jobs:
-  deploy:
+  test:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Check out code
       uses: actions/checkout@v2
 
-    - name: Set up Kubernetes context
-      uses: azure/k8s-set-context@v1
+    - name: Set up Go
+      uses: actions/setup-go@v2
       with:
-        kubeconfig: ${{ secrets.KUBECONFIG }}
+        go-version: 1.x
 
-    - name: Deploy frontend to Kubernetes
-      uses: azure/k8s-deploy@v1
+    - name: Build and test
+      run: |
+        cd frontend
+        go test -v ./...
+        
+    - name: Upload test results
+      uses: actions/upload-artifact@v2
       with:
-        manifests: |
-          ./path-to-manifests/frontend-deployment.yaml
-        namespace: default
-        action: 'apply'
+        name: test-results
+        path: frontend/test_report.txt
 
-    - name: Deploy backend to Kubernetes
-      uses: azure/k8s-deploy@v1
-      with:
-        manifests: |
-          ./path-to-manifests/backend-deployment.yaml
-        namespace: default
-        action: 'apply'
+  docker:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Build frontend Docker image
+      run: |
+        cd frontend
+        docker build -t ghcr.io/${{ github.repository_owner }}/group04b-frontend:latest .
+
+    - name: Build backend Docker image
+      run: |
+        cd backend
+        docker build -t ghcr.io/${{ github.repository_owner }}/group04b-backend:latest .
+
+    - name: Login to GitHub Container Registry
+      run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+    - name: Push frontend Docker image
+      run: docker push ghcr.io/${{ github.repository_owner }}/group04b-frontend:latest
+
+    - name: Push backend Docker image
+      run: docker push ghcr.io/${{ github.repository_owner }}/group04b-backend:latest
