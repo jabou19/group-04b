@@ -19,6 +19,7 @@ spec:
         app: deployment-backend
     spec:
       containers:
+<<<<<<< HEAD
 
 #      - image: eficodeacademy/devopsacademyb:latest
 #      - image: ghcr.io/eficode-academy/quotes-flask-backend:release
@@ -26,3 +27,12 @@ spec:
         name: myfirstapp
         resources: {}
 status: {}
+=======
+        - image: jabou19/myfirstapp:latest
+          name: myfirstapp
+          resources: {}
+
+#      - image: eficodeacademy/devopsacademyb:latest
+#      - image: ghcr.io/eficode-academy/quotes-flask-backend:release
+status: {}
+>>>>>>> 04aa623d46b5201fc54efcb482f2149bfb959ddf

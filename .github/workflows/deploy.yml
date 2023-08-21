@@ -13,9 +13,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-        
       - name: Set execute permission
-        run: chmod +x deploy.sh
+        run: chmod +x /home/runner/work/group-04b/group-04b/kubernetes_yaml/deploy.sh
+
+      - name: authentication
+        run: echo "${{ secrets.KUBECONFIG }}"
 
       - name: Deploy to Kubernetes
-        run: ./deploy.sh
+        run: /home/runner/work/group-04b/group-04b/kubernetes_yaml/deploy.sh
